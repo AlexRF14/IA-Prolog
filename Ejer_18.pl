@@ -1,18 +1,22 @@
-% parte 18
+%Parte 18
+%Todo objeto es parte de sí mismo.
+%El objeto X es parte de Y si X es parte directa de Y .
+%El objeto X es parte de Z si X es parte directa de Y e Y es parte de Z.
+%El objeto X es parte propia de Y si X es parte de Y y X no es Y
 
+parte(X , X):-
+    obj(X).
 
 parte(X , Y):-
-    forma(a , b),
-    forma(b , c),
-    parte2(a , c).
+    parte_directa(X , Y).
 
-parte2(X , Y):-
-    parte(X , Z),
+parte(X , Y):-
+    parte_directa(X , Z),
     parte(Z , Y).
 
-forma(a , a).
-forma(b , b).
-forma(c , c).
+obj(a).
+obj(b).
+obj(c).
 
-forma(a , b).
-forma(b , c).
+parte_directa(a, b).
+parte_directa(b , c).
