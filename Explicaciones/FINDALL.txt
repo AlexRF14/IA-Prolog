@@ -1,0 +1,15 @@
+Instrucción FINDALL se usa para ver/guardar todos los resultados posibles de una consulta
+
+Quiero saber todos los posibles resultados para la consulta p(X)
+
+p(X) :- q(X) , r(X). % 1 
+p(X) :- s(X). % 2 
+q(a). % 3 
+q(b). % 4 
+r(a). % 5
+r(b).  % 6
+s(c).  % 7
+
+?- findall (X , p(X) , L).
+L = [a , b]
+true
