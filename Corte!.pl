@@ -161,7 +161,7 @@ s(c).  % 7
  ¬ S(X) res 8 , 2 % 9'' volvemos a presionar ;
  % "Solución X/b res 7 => true X = c  % 10''
 
- % Qué ocurre si incorporamos un corte???
+%% Qué ocurre si incorporamos un corte???
 
 p(X) :- ! , q(X) , r(X). % 1
 p(X) :- s(X). % 2 
@@ -181,5 +181,19 @@ s(c).  % 7
 ¬ r(b) X/b en 11 res 4 % 12'
 % "Solución" res 12' , 6 => true X = b % 13'
 
+%% Qué ocurre si incorporamos un corte al final???
+    % Seguimos buscando p(X) ? 
+p(X) :- q(X) , r(X) , !. % 1
+p(X) :- s(X). % 2 
+q(a). % 3 Posibilidades cuando voy a comenar el paso 10
+q(b). % 4 Posibilidades cuando voy a comenar el paso 10
+r(a). % 5
+r(b).  % 6
+s(c).  % 7
 
-
+¬ p(X) hip % 8
+¬ q(X) | ¬ r(X) % 9 y además, motosierra 
+¬ q(a) | ¬ r(a) X/a % 10 y además, motosierra X/a en 9
+¬ r(a) X/a en 10 , 3 % 11 y además, motosierra
+% "Solución" => true X = a % 12 y además, motosierra en ejecución, se realiza el corte
+% Con esto nos quedamos con X = a para q(a) y r(a) % 13
