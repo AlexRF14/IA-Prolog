@@ -155,7 +155,8 @@ s(c).  % 7
 ¬ q(X) | ¬ r(X) res: 8 , 1 % 9
 ¬ r(a) X/a en 9 , 3 % 10
  % "Solución" res 10 , 5 => tore X = a % 11 
-¬ r(b) X/b en 9 , 4 % 10' Cuando se presiona ; Sería como volver a la anterior decisión, recordar ejemplo viaje en coche Oviedo
+¬ r(b) X/b en 9 , 4 % 10' Cuando se presiona ; Sería como volver a la 
+            % anterior decisión, recordar ejemplo viaje en coche Oviedo
  % "Solución res 10' , 6 % 11'
  ¬ S(X) res 8 , 2 % 9'' volvemos a presionar ;
  % "Solución X/b res 7 => true X = c  % 10''
@@ -172,12 +173,13 @@ s(c).  % 7
  
 ¬ p(X) hip %  8
 % Ejecutamos el corte ( ! ) ,y luego ¬ q(X) | ¬ r(X) res 8 , 1  % 9
-% Se elimina "2" % 10
+% Se ejecuta y con ello se elimina "2" % 10
 ¬ q(X) | ¬r(X) % 11
+% Aclarativo => ¬ q(a) | ¬ r(a) X/a en 11
 ¬ r(a) X/a en 11 , 3 % 12
-% "Solución" res 12 , 5 => true X = a
+% "Solución" res 12 , 5 => true X = a % 13
 ¬ r(b) X/b en 11 res 4 % 12'
-% "Solución" res 12' , 6 => true X = b
+% "Solución" res 12' , 6 => true X = b % 13'
 
 
 
