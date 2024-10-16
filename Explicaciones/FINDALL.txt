@@ -11,5 +11,5 @@ r(b).  % 6
 s(c).  % 7
 
 ?- findall (X , p(X) , L).
-L = [a , b]
+L = [a , b , c]
 true
