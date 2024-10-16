@@ -1,5 +1,7 @@
+Fecha: 16/10/24
 Instrucción FINDALL se usa para ver/guardar todos los resultados posibles de una consulta
 
+Ejemplo 1;
 Quiero saber todos los posibles resultados para la consulta p(X)
 
 p(X) :- q(X) , r(X). % 1 
@@ -12,4 +14,16 @@ s(c).  % 7
 
 ?- findall (X , p(X) , L).
 L = [a , b , c]
+true
+
+Ejemplo 2;
+Quiero todos los resultados de la consulta, p(X , Y)
+
+p(X , Y) :- q(X) , r(Y).
+q(a).
+r(a).
+r(b).
+
+?- fincall((X , Y)  , p(X , Y) , L).
+L = [(a , a) , (a , b)]
 true
