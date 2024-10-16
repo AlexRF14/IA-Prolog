@@ -137,3 +137,47 @@ escoger r(Y), quedando me con r(c) % Si q(a) y r(c) me sirven,
 me quedo con estas opciones y no desarrollo nada más, a no ser que el 
 usuario utilice ; (Visualizar, y en este caso desarrollar más opciones)
 */
+
+% El Corte en mode de demostración día 16/10/2024
+% Otra forma de explicar el corte
+%Ejercicio 31
+
+p(X) :- q(X) , r(X). % 1 Posibilidades en el paso 9
+p(X) :- s(X). % 2 Posibilidades en el paso 9
+q(a). % 3 Posibilidades para comenzar el paso 10
+q(b). % 4 Posibilidades para comenzar el paso 10s
+r(a). % 5
+r(b).  % 6
+s(c).  % 7
+
+% Queremos comprobar si p(X) es verdadero
+¬ p(X) hip % 8
+¬ q(X) | ¬ r(X) res: 8 , 1 % 9
+¬ r(a) X/a en 9 , 3 % 10
+ % "Solución" res 10 , 5 => tore X = a % 11 
+¬ r(b) X/b en 9 , 4 % 10' Cuando se presiona ; Sería como volver a la anterior decisión, recordar ejemplo viaje en coche Oviedo
+ % "Solución res 10' , 6 % 11'
+ ¬ S(X) res 8 , 2 % 9'' volvemos a presionar ;
+ % "Solución X/b res 7 => true X = c  % 10''
+
+ % Qué ocurre si incorporamos un corte???
+
+p(X) :- ! , q(X) , r(X). % 1
+p(X) :- s(X). % 2 
+q(a). % 3 Posibilidades cuando voy a comenzar  el paso 12
+q(b). % 4 Posibilidades cuando voy a comenzar  el paso 12
+r(a). % 5
+r(b).  % 6
+s(c).  % 7
+ 
+¬ p(X) hip %  8
+% Ejecutamos el corte ( ! ) ,y luego ¬ q(X) | ¬ r(X) res 8 , 1  % 9
+% Se elimina "2" % 10
+¬ q(X) | ¬r(X) % 11
+¬ r(a) X/a en 11 , 3 % 12
+% "Solución" res 12 , 5 => true X = a
+¬ r(b) X/b en 11 res 4 % 12'
+% "Solución" res 12' , 6 => true X = b
+
+
+
