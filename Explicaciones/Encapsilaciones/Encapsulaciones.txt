@@ -69,5 +69,5 @@ Ejemplo 4. El servicio devuelve Json. % El profesor ha dicho que es el que más 
 Hemos pasado ha hacer los ejercicios de ServicioRest, leer el README para entender.
 
 Basandonos en el Ejemplo 1, vamos a ver estos casos:
-Ejemplo 1.1 (GET)
-Ejemplo 1.2 (POST)
+Ejemplo 1.1 (GET) => Aparece en el README
+Ejemplo 1.2 (POST) => Campus VR Se llama post_example.pl
