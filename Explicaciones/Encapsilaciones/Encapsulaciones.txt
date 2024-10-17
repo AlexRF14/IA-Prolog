@@ -1,0 +1,73 @@
+Fecha 17/10/24
+
+1. Base de conocimiento embebida en una aplicación general (p ej, en Java),
+   sobre el juego torre-rey contra rey
+
+Con esto valía la pena mencionar que el juego del torre-rey contra rey es un juego de 
+estrategia que se juega en un tablero de ajedrez, donde el objetivo es
+que el rey del jugador que juega contra el torre del otro jugador no se capture.
+
+|------------------------------------------------------------|
+|Interfaz de usuario en Java (interfaz gráfica de escritorio)|
+|------------------------------------------------------------|
+
+|--------------------------------------------------|
+|Conector(proporcionado por la gente del swi-Prolog|
+|--------------------------------------------------|
+
+|-------------------------------------------------------|
+|Base de conocimiento del juego del torre-rey contra rey|
+|-------------------------------------------------------|
+
+% Con estas cajitas nos valía para poder hacer funcionar el juego
+
+2. Base de conocimientos encapsulados en un servicio
+                 ---------------
+Interfaz  =>     |Interfaz HTTP| (Otro  servicio/sistema interactua con la intz)
+   |             ---------------
+   |             -----------------------------------------------
+Negocio =>       |Base de conocimientos que permite indetificar|
+   |             |compuestos químicos.                         |
+   |             -----------------------------------------------
+   |             -----------------------------------------------
+Datos   =>       |Fichero con los hechos indpendientes del caso| (Factos, siempre son asi)
+                 -----------------------------------------------
+
+El Mediator era un monolito que se especializaba en proporcionado acceso
+a la base de conocimientos (En este caso).
+
+En Mediator cuando alguien requería del servicio Prolog, se le daba acceso. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Qué código vamos a analizar?
+Ejemplo 1. Un servicio HTTP que recibe una petición y responde. No utiliza
+ningún lenguaje estándar ni en la consulta ni en la respuesta.
+
+Ejemplo 2. El servicio devuelve HTML.
+En la realidad esto ocurre cuando el navegador obtiene información desde un
+servidor.  
+         --------------------------------------------------------------------------
+         |Navegador ---Consulta HTTP--->  Servidor ---Respuesta HTML---> Navegador|
+         --------------------------------------------------------------------------
+
+Ejemplo 3. El servicio devuelve JavaScript.
+         -----------------------------------------------------------------------
+         |Navegador ---Consulta HTTP---> Servidor ---Respuesta JS---> Navegador|
+         -----------------------------------------------------------------------
+
+Ejemplo 4. El servicio devuelve Json. % El profesor ha dicho que es el que más vamos a usar)
+
+         Solicitantes de información (Usa la aplicación/servicio que realiza la consulta)
+                                             | 
+         Consluta HTTP                       v
+                                          Servicio
+                                             |
+         Respuesta en Json                   v
+                                          Api/Serv          
+
+
+Hemos pasado ha hacer los ejercicios de ServicioRest, leer el README para entender.
+
+Basandonos en el Ejemplo 1, vamos a ver estos casos:
+Ejemplo 1.1 (GET)
+Ejemplo 1.2 (POST)
