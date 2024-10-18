@@ -35,6 +35,9 @@ QUE PUEDE HACER EL PROGRAMA:
 9º  Cada jugador tiene 16 piezas en el tablero, dos torres, dos alfiles, dos caballos,
     ocho peones, una reina y un rey.
 
+//Personalizar cada ficha?
+//Crear escenarios 
+
 10º La posición de las  piezas en el tablero es la siguiente: 
     Las piezas del usario 1: blanco
     En la fila 1, la posición de las piezas es la siguiente: a1 = torre, b1 = caballo, 
