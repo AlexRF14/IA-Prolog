@@ -1,0 +1,80 @@
+Fecha 23/10/2024
+
+Link a wikidata:
+https://query.wikidata.org/#%23Personas%20nacidas%20en%20Nueva%20York%0A%23title%3A%20<span%20lang%3D"en"%20dir%3D"ltr"%20class%3D"mw-content-ltr">Humans%20born%20in%20New%20York%20City<%2Fspan>%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3FitemDescription%20%3Fsitelinks%0AWHERE%20%7B%0A%20%20%20%20%3Fitem%20wdt%3AP31%20wd%3AQ5%3B%20%20%20%20%20%20%20%20%20%20%20%20%23%20Any%20instance%20of%20a%20human%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP19%2Fwdt%3AP131%2a%20wd%3AQ60%3B%20%23%20Who%20was%20born%20in%20any%20value%20%28eg.%20a%20hospital%29%0A%23%20that%20has%20the%20property%20of%20%27administrative%20area%20of%27%20New%20York%20City%20or%20New%20York%20City%20itself.%0A%0A%23%20Note%20that%20using%20wdt%3AP19%20wd%3AQ60%3B%20%20%23%20Who%20was%20born%20in%20New%20York%20City.%0A%23%20Doesn%27t%20include%20humans%20with%20the%20birth%20place%20listed%20as%20a%20hospital%0A%23%20or%20an%20administrative%20area%20or%20other%20location%20of%20New%20York%20City.%0A%0A%20%20%20%20%20%20%20%20%20%20wikibase%3Asitelinks%20%3Fsitelinks.%0A%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20"%5BAUTO_LANGUAGE%5D%2Cmul%2Cen"%20%7D%0A%7D%0AORDER%20BY%20DESC%28%3Fsitelinks%29
+
+Donde se pueden hacer consultas.
+
+
+#Red Semántica
+La red semántica es una representación de la información en forma de nodos y aristas
+donde cada nodo representa un concepto o entidad y cada arista representa la relación entre dos nod os.
+La red semántica se puede utilizar para representar la estructura de la información y facilitar 
+la búsqueda de información relacionada. 
+
+Abraham casado con Sara
+Isaac es hijo de Abraham
+Isaac es hijo de Sara
+
+La representación real sería algo así como:
+https://uspceu.es/laBiblia#Abraham = Abraham
+https://uspceu.es/laBiblia#estáCasadoCon
+https://uspceu.es/laBiblia#Sara.
+
+
+Temas de nuestra base de hechos:
+El lenguaje que se usa es RDF(reconmendado por el W3C, es decir, el consenso de la W2S)
+
+Formatos de RDF:
+-XML: La más antigua, ahora se usa mucho menos
+-N3: Muy buena para el ordenador, si no tenemos que representarla visualmente. Usa JSON
+-Turtle: Más facil de hacer y usa prefijos
+
+Uso de etiquetas en la representación para no "casarse" con ningún lenguaje natural. 
+https://uspceu.es/laBiblia#Abraham rdfs:label
+    "Abraham"@es   => Con esto estoy diciendo que la etiqueta "Abraham" esta en español
+    
+
+Mirar este enlace donde se explican las tres formas
+/* https://medium.com/wallscope/understanding-linked-data-formats-rdf-xml-vs-turtle-vs-n-triples-eb931dbe9827*/
+
+El lenguaje que se usa para la Ontología: OWL (reconmendado por la W3C)
+
+Lenguaje OWL: Es un subconjunto de la lógica de predicados de 1º orden sin variables que permite, y es parte de la Lógica Descriptivo
+representar clases y sus propiedades.
+Vendría a ser una representación en lógica de la orientación a objetos.
+Ejemplo:
+Una persona es una persona que tiene Padre y Madre
+Persona[E(de al menos) tienePadre.Hombre & (intersección lógica) E(de al menos) tieneMadre.Mujer] 
+
+Representación en lógica de predicados con variables:
+Para todas las personas(X) -> (al menos Hombre(y) y tienePadre(x , y))  y (al menos Mujer(y) y tieneMadre(x, y))
+
+Notación Manchester: 
+Persona [ tienePadre some Hombre "intersección" tieneMadre some Mujer
+
+Representación de  la BC del Ejemplo 
+
+Persona [ tienePadre some Hombre "intersección" tieneMadre some Mujer
+
+Hombre [ Persona //Subclase de Persona
+Mujer [ Persona /Subclase de Persona
+
+esPadreDe = tienePadre^-1 //Es relación inversa
+esMadreDe = tieneMadre^-1 //Es relación inversa
+
+Hombre [casadoCon only Mujer
+Mujer [casadoCon only Hombre
+
+En notación tradicional se escribe como:
+    Hombre [ en todo los casos casadoCon Mujer
+En lógica de predicados de 1º oorden con variables se escribe como:
+    para cualquier caso de x e y donde Hombre casado, con el que se ha casado es con una Mujer
+    para cualquier caso de x e y, si Hombre(x) "intersección"  casadoCon(x, y) "entonces" -> Mujer(y)
+
+Todo  lo que se ha explicado anteriormente se puede ver en el siguiente dibujo:
+Resumen, usar OWL para el esquema y RDF para los echos. Y juntos permiten trabajar como si de un programa
+orientado a objetos se tratase. 
+"Prolog se asume el munde cerrado, OWL asume mundo abierto".
+
+Fecha 24/10/2024
