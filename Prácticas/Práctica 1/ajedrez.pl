@@ -53,3 +53,9 @@ casilla(peonNegro , f7).
 casilla(peonNegro , g7).
 casilla(peonNegro , h7).
 
+/* 
+Usar assertz y retract  para agregar y eliminar hechos, como las posiciones iniciales de las piezas
+
+
+
+*/
