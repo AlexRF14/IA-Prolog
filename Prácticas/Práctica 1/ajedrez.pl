@@ -53,6 +53,12 @@ casilla(peonNegro , f7).
 casilla(peonNegro , g7).
 casilla(peonNegro , h7).
 
+% Movimiento peónBlanco
+/*
+move(Ficha , pre , post):-
+        assertz(casilla(Ficha , post)),
+        retract(casilla(Ficha , pre)).
+*/
 /* 
 Usar assertz y retract  para agregar y eliminar hechos, como las posiciones iniciales de las piezas
 
