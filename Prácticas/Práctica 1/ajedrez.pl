@@ -67,6 +67,8 @@ movi(peonBlanco , Col , Fil):-
         retract(casilla(_, prox_col , prox_fil)).
         retract(casilla(peonBlanco , Col , Fil)).
 
+
+
 movi(peonNegro , Col , Fil):-
         prox_fil is Fil - 1,
         Fil >= 1 , Fil <=  8,
@@ -75,6 +77,20 @@ movi(peonNegro , Col , Fil):-
         not (casilla(_, Col, prox_fil)),
         assert(casilla(peonNegro , Col , prox_fil)),
         retract(casilla(peonNegro , Col , Fil)).
+
+movi(peonNegro , Col , Fil):-
+        (prox_fil is Fil - 1, prox_col is + Col + 1;
+         prox_fil is Fil - 1, prox_col is + Col - 1),
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(peonNegro , Col , Fil),
+        casilla(_, prox_col , prox_fil),
+        not casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        assert(casilla(peonNegro, prox_col , prox_fil)),
+        retract(casilla(_, prox_col , prox_fil)).
+        retract(casilla(peonNegro , Col , Fil)).
+
+
 
 movi(caballoBlanco ,  Col , Fil , Prox_col , Prox_fil):-
         (Prox_fil is Fil + 2, Prox_col is Col + 1;
