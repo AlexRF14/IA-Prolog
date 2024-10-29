@@ -51,7 +51,7 @@ movi(peonBlanco , Col , Fil):-
         Fil >= 1 , Fil <=  8,
         Col >= 1, Col =< 8,
         casilla(peonBlanco , Col , Fil),
-        not (casilla(_, Col, prox_fil)),
+        \+ (casilla(_, Col, prox_fil)),
         assert(casilla(peonBlanco , Col , prox_fil)),
         retract(casilla(peonBlanco , Col , Fil)).
 
@@ -62,7 +62,7 @@ movi(peonBlanco , Col , Fil):-
         Col >= 1, Col =< 8,
         casilla(peonBlanco , Col , Fil),
         casilla(_, prox_col , prox_fil),
-        not casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
+        \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
         assert(casilla(peonBlanco, prox_col , prox_fil)),
         retract(casilla(_, prox_col , prox_fil)).
         retract(casilla(peonBlanco , Col , Fil)).
@@ -74,7 +74,7 @@ movi(peonNegro , Col , Fil):-
         Fil >= 1 , Fil <=  8,
         Col >= 1, Col =< 8,
         casilla(peonNegro , Col , Fil),
-        not (casilla(_, Col, prox_fil)),
+        \+ (casilla(_, Col, prox_fil)),
         assert(casilla(peonNegro , Col , prox_fil)),
         retract(casilla(peonNegro , Col , Fil)).
 
@@ -85,9 +85,9 @@ movi(peonNegro , Col , Fil):-
         Col >= 1, Col =< 8,
         casilla(peonNegro , Col , Fil),
         casilla(_, prox_col , prox_fil),
-        not casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        retract(casilla(_, prox_col , prox_fil)),
         assert(casilla(peonNegro, prox_col , prox_fil)),
-        retract(casilla(_, prox_col , prox_fil)).
         retract(casilla(peonNegro , Col , Fil)).
 
 
@@ -104,14 +104,286 @@ movi(caballoBlanco ,  Col , Fil , Prox_col , Prox_fil):-
         Fil >= 1 , Fil <=  8,
         Col >= 1, Col =< 8,
         casilla(caballoBlanco , Col , Fil),
-        casilla(caballoBlanco , Prox_col , Prox_fil),
-        not (casilla(_, Prox_col, Prox_fil)),
+        \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
+        retract(casilla(_  , Prox_col , Prox_fil)),
         assert(casilla(caballoBlanco , Prox_col , Prox_fil)),
         retract(casilla(caballoBlanco , Col , Fil)).
 
-movi(alfilBlanco , Col , Fil , Prox_fil, Prox_col):-
+movi(caballoNegro ,  Col , Fil , Prox_col , Prox_fil):-
+        (Prox_fil is Fil + 2, Prox_col is Col + 1;
+        Prox_fil is Fil + 2, Prox_col is Col - 1;
+        Prox_fil is Fil - 2, Prox_col is Col + 1;
+        Prox_fil is Fil - 2, Prox_col is Col - 1;
+        Prox_fil is Fil + 1, Prox_col is Col + 2;
+        Prox_fil is Fil + 1, Prox_col is Col - 2;
+        Prox_fil is Fil - 1, Prox_col is Col + 2;
+        Prox_fil is Fil - 1, Prox_col is Col - 2),
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(caballoNegro , Col , Fil),
+        \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        retract(casilla(_  , Prox_col , Prox_fil)),
+        assert(casilla(caballoNegro , Prox_col , Prox_fil)),
+        retract(casilla(caballoNegro , Col , Fil)).
 
-movi(alfilNegro  , Col , Fil , Prox_fil, Prox_col):-
+movi(alfilBlanco , Col , Fil , Prox_fil, Prox_col):-
+        (Prox_fil is Fil - 1, Prox_col is Col - 1;
+        Prox_fil is Fil -2 , Prox_col is Col - 2;
+        Prox_fil is Fil - 3, Prox_col is Col - 3;
+        Prox_fil is Fil - 4, Prox_col is Col - 4;
+        Prox_fil is Fil - 5, Prox_col is Col - 5;
+        Prox_fil is Fil -6 , Prox_col is Col - 6;
+        Prox_fil is Fil - 7, Prox_col is Col - 7;
+        Prox_fil is Fil + 1, Prox_col is Col - 1;
+        Prox_fil is Fil + 2, Prox_col is Col - 2;
+        Prox_fil is Fil + 3, Prox_col is Col - 3;
+        Prox_fil is Fil + 4, Prox_col is Col - 4;
+        Prox_fil is Fil + 5, Prox_col is Col - 5;
+        Prox_fil is Fil + 6, Prox_col is Col - 6;
+        Prox_fil is Fil + 7, Prox_col is Col - 7;
+        Prox_fil is Fil - 1, Prox_col is Col + 1;
+        Prox_fil is Fil - 2, Prox_col is Col + 2;
+        Prox_fil is Fil - 3, Prox_col is Col + 3;
+        Prox_fil is Fil - 4, Prox_col is Col + 4;
+        Prox_fil is Fil - 5, Prox_col is Col + 5;
+        Prox_fil is Fil - 6, Prox_col is Col + 6;
+        Prox_fil is Fil - 7, Prox_col is Col + 7;
+        Prox_fil is Fil + 1, Prox_col is Col + 1;
+        Prox_fil is Fil + 2, Prox_col is Col + 2;
+        Prox_fil is Fil + 3, Prox_col is Col + 3;
+        Prox_fil is Fil + 4, Prox_col is Col + 4;
+        Prox_fil is Fil + 5, Prox_col is Col + 5;
+        Prox_fil is Fil + 6, Prox_col is Col + 6;
+        Prox_fil is Fil + 7, Prox_col is Col + 7),
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(alfilBlanco , Col , Fil),
+        \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
+        % QUEDA HACER QUE NO PUEDAN SALTAR PIEZAS 
+        retract(casilla(_  , Prox_col , Prox_fil)),
+        assert(casilla(alfilBlanco , Prox_col , Prox_fil)),
+        retract(casilla(alfilBlanco , Col , Fil)).
+
+movi(alfilNegro , Col , Fil , Prox_fil, Prox_col):-
+        (Prox_fil is Fil - 1, Prox_col is Col - 1;
+        Prox_fil is Fil -2 , Prox_col is Col - 2;
+        Prox_fil is Fil - 3, Prox_col is Col - 3;
+        Prox_fil is Fil - 4, Prox_col is Col - 4;
+        Prox_fil is Fil - 5, Prox_col is Col - 5;
+        Prox_fil is Fil -6 , Prox_col is Col - 6;
+        Prox_fil is Fil - 7, Prox_col is Col - 7;
+        Prox_fil is Fil + 1, Prox_col is Col - 1;
+        Prox_fil is Fil + 2, Prox_col is Col - 2;
+        Prox_fil is Fil + 3, Prox_col is Col - 3;
+        Prox_fil is Fil + 4, Prox_col is Col - 4;
+        Prox_fil is Fil + 5, Prox_col is Col - 5;
+        Prox_fil is Fil + 6, Prox_col is Col - 6;
+        Prox_fil is Fil + 7, Prox_col is Col - 7;
+        Prox_fil is Fil - 1, Prox_col is Col + 1;
+        Prox_fil is Fil - 2, Prox_col is Col + 2;
+        Prox_fil is Fil - 3, Prox_col is Col + 3;
+        Prox_fil is Fil - 4, Prox_col is Col + 4;
+        Prox_fil is Fil - 5, Prox_col is Col + 5;
+        Prox_fil is Fil - 6, Prox_col is Col + 6;
+        Prox_fil is Fil - 7, Prox_col is Col + 7;
+        Prox_fil is Fil + 1, Prox_col is Col + 1;
+        Prox_fil is Fil + 2, Prox_col is Col + 2;
+        Prox_fil is Fil + 3, Prox_col is Col + 3;
+        Prox_fil is Fil + 4, Prox_col is Col + 4;
+        Prox_fil is Fil + 5, Prox_col is Col + 5;
+        Prox_fil is Fil + 6, Prox_col is Col + 6;
+        Prox_fil is Fil + 7, Prox_col is Col + 7),
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(alfilNegro , Col , Fil),
+        \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        retract(casilla(_  , Prox_col , Prox_fil)),
+        assert(casilla(alfilNegro , Prox_col , Prox_fil)),
+        retract(casilla(alfilNegro , Col , Fil)).
+
+movi(torreBlanco,  Col, Fil, Prox_col, Prox_fil):-
+        (Prox_col is Col + 1; Prox_col is Col - 1;
+         Prox_col is Col + 2; Prox_col is Col - 2;
+         Prox_col is Col + 3; Prox_col is Col - 3;
+         Prox_col is Col + 4; Prox_col is Col - 4;
+         Prox_col is Col + 5; Prox_col is Col - 5;
+         Prox_col is Col + 6; Prox_col is Col - 6;
+         Prox_col is Col + 7; Prox_col is Col - 7;
+         Prox_fil is Fil + 1; Prox_fil is Fil - 1;
+         Prox_fil is Fil + 2; Prox_fil is Fil - 2;
+         Prox_fil is Fil + 3; Prox_fil is Fil - 3;
+         Prox_fil is Fil + 4; Prox_fil is Fil - 4;
+         Prox_fil is Fil + 5; Prox_fil is Fil - 5;
+         Prox_fil is Fil + 6; Prox_fil is Fil - 6;
+         Prox_fil is Fil + 7; Prox_fil is Fil - 7;)
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(torreBlanco , Col , Fil),
+        \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
+        % QUEDA HACER QUE NO PUEDAN SALTAR PIEZAS 
+        retract(casilla(_ ,  Prox_col , Prox_fil)),
+        assert(casilla(torreBlanco , Prox_col , Prox_fil)),
+        retract(casilla(torreBlanco , Col , Fil)).
+
+movi(torreNegro,  Col, Fil, Prox_col, Prox_fil):-
+        (Prox_col is Col + 1; Prox_col is Col - 1;
+         Prox_col is Col + 2; Prox_col is Col - 2;
+         Prox_col is Col + 3; Prox_col is Col - 3;
+         Prox_col is Col + 4; Prox_col is Col - 4;
+         Prox_col is Col + 5; Prox_col is Col - 5;
+         Prox_col is Col + 6; Prox_col is Col - 6;
+         Prox_col is Col + 7; Prox_col is Col - 7;
+         Prox_fil is Fil + 1; Prox_fil is Fil - 1;
+         Prox_fil is Fil + 2; Prox_fil is Fil - 2;
+         Prox_fil is Fil + 3; Prox_fil is Fil - 3;
+         Prox_fil is Fil + 4; Prox_fil is Fil - 4;
+         Prox_fil is Fil + 5; Prox_fil is Fil - 5;
+         Prox_fil is Fil + 6; Prox_fil is Fil - 6;
+         Prox_fil is Fil + 7; Prox_fil is Fil - 7;)
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(torreNegro , Col , Fil),
+        \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        % QUEDA HACER QUE NO PUEDAN SALTAR PIEZAS 
+        retract(casilla(_ ,  Prox_col , Prox_fil)),
+        assert(casilla(torreNegro , Prox_col , Prox_fil)),
+        retract(casilla(torreNegro , Col , Fil)).
+
+move(reinaBlanco , Col , Fil, Prox_col, Prox_fil):-
+        (Prox_col is Col + 1; Prox_col is Col - 1;
+         Prox_col is Col + 2; Prox_col is Col - 2;
+         Prox_col is Col + 3; Prox_col is Col - 3;
+         Prox_col is Col + 4; Prox_col is Col - 4;
+         Prox_col is Col + 5; Prox_col is Col - 5;
+         Prox_col is Col + 6; Prox_col is Col - 6;
+         Prox_col is Col + 7; Prox_col is Col - 7;
+         Prox_fil is Fil + 1; Prox_fil is Fil - 1;
+         Prox_fil is Fil + 2; Prox_fil is Fil - 2;
+         Prox_fil is Fil + 3; Prox_fil is Fil - 3;
+         Prox_fil is Fil + 4; Prox_fil is Fil - 4;
+         Prox_fil is Fil + 5; Prox_fil is Fil - 5;
+         Prox_fil is Fil + 6; Prox_fil is Fil - 6;
+         Prox_fil is Fil + 7; Prox_fil is Fil - 7;
+
+        Prox_fil is Fil - 1, Prox_col is Col - 1;
+        Prox_fil is Fil -2 , Prox_col is Col - 2;
+        Prox_fil is Fil - 3, Prox_col is Col - 3;
+        Prox_fil is Fil - 4, Prox_col is Col - 4;
+        Prox_fil is Fil - 5, Prox_col is Col - 5;
+        Prox_fil is Fil -6 , Prox_col is Col - 6;
+        Prox_fil is Fil - 7, Prox_col is Col - 7;
+        Prox_fil is Fil + 1, Prox_col is Col - 1;
+        Prox_fil is Fil + 2, Prox_col is Col - 2;
+        Prox_fil is Fil + 3, Prox_col is Col - 3;
+        Prox_fil is Fil + 4, Prox_col is Col - 4;
+        Prox_fil is Fil + 5, Prox_col is Col - 5;
+        Prox_fil is Fil + 6, Prox_col is Col - 6;
+        Prox_fil is Fil + 7, Prox_col is Col - 7;
+        Prox_fil is Fil - 1, Prox_col is Col + 1;
+        Prox_fil is Fil - 2, Prox_col is Col + 2;
+        Prox_fil is Fil - 3, Prox_col is Col + 3;
+        Prox_fil is Fil - 4, Prox_col is Col + 4;
+        Prox_fil is Fil - 5, Prox_col is Col + 5;
+        Prox_fil is Fil - 6, Prox_col is Col + 6;
+        Prox_fil is Fil - 7, Prox_col is Col + 7;
+        Prox_fil is Fil + 1, Prox_col is Col + 1;
+        Prox_fil is Fil + 2, Prox_col is Col + 2;
+        Prox_fil is Fil + 3, Prox_col is Col + 3;
+        Prox_fil is Fil + 4, Prox_col is Col + 4;
+        Prox_fil is Fil + 5, Prox_col is Col + 5;
+        Prox_fil is Fil + 6, Prox_col is Col + 6;
+        Prox_fil is Fil + 7, Prox_col is Col + 7;),
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(reinaBlanco , Col , Fil),
+        \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
+        % QUEDA HACER QUE NO PUEDAN SALTAR PIEZAS 
+        retract(casilla(_ ,  Prox_col , Prox_fil)),
+        assert(casilla(reinaBlanco , Prox_col , Prox_fil)),
+        retract(casilla(reinaBlanco , Col , Fil)).
+
+move(reinaNegro , Col , Fil, Prox_col, Prox_fil):-
+        (Prox_col is Col + 1; Prox_col is Col - 1;
+         Prox_col is Col + 2; Prox_col is Col - 2;
+         Prox_col is Col + 3; Prox_col is Col - 3;
+         Prox_col is Col + 4; Prox_col is Col - 4;
+         Prox_col is Col + 5; Prox_col is Col - 5;
+         Prox_col is Col + 6; Prox_col is Col - 6;
+         Prox_col is Col + 7; Prox_col is Col - 7;
+         Prox_fil is Fil + 1; Prox_fil is Fil - 1;
+         Prox_fil is Fil + 2; Prox_fil is Fil - 2;
+         Prox_fil is Fil + 3; Prox_fil is Fil - 3;
+         Prox_fil is Fil + 4; Prox_fil is Fil - 4;
+         Prox_fil is Fil + 5; Prox_fil is Fil - 5;
+         Prox_fil is Fil + 6; Prox_fil is Fil - 6;
+         Prox_fil is Fil + 7; Prox_fil is Fil - 7;
+
+        Prox_fil is Fil - 1, Prox_col is Col - 1;
+        Prox_fil is Fil -2 , Prox_col is Col - 2;
+        Prox_fil is Fil - 3, Prox_col is Col - 3;
+        Prox_fil is Fil - 4, Prox_col is Col - 4;
+        Prox_fil is Fil - 5, Prox_col is Col - 5;
+        Prox_fil is Fil -6 , Prox_col is Col - 6;
+        Prox_fil is Fil - 7, Prox_col is Col - 7;
+        Prox_fil is Fil + 1, Prox_col is Col - 1;
+        Prox_fil is Fil + 2, Prox_col is Col - 2;
+        Prox_fil is Fil + 3, Prox_col is Col - 3;
+        Prox_fil is Fil + 4, Prox_col is Col - 4;
+        Prox_fil is Fil + 5, Prox_col is Col - 5;
+        Prox_fil is Fil + 6, Prox_col is Col - 6;
+        Prox_fil is Fil + 7, Prox_col is Col - 7;
+        Prox_fil is Fil - 1, Prox_col is Col + 1;
+        Prox_fil is Fil - 2, Prox_col is Col + 2;
+        Prox_fil is Fil - 3, Prox_col is Col + 3;
+        Prox_fil is Fil - 4, Prox_col is Col + 4;
+        Prox_fil is Fil - 5, Prox_col is Col + 5;
+        Prox_fil is Fil - 6, Prox_col is Col + 6;
+        Prox_fil is Fil - 7, Prox_col is Col + 7;
+        Prox_fil is Fil + 1, Prox_col is Col + 1;
+        Prox_fil is Fil + 2, Prox_col is Col + 2;
+        Prox_fil is Fil + 3, Prox_col is Col + 3;
+        Prox_fil is Fil + 4, Prox_col is Col + 4;
+        Prox_fil is Fil + 5, Prox_col is Col + 5;
+        Prox_fil is Fil + 6, Prox_col is Col + 6;
+        Prox_fil is Fil + 7, Prox_col is Col + 7;),
+        Fil >= 1 , Fil <=  8,
+        Col >= 1, Col =< 8,
+        casilla(reinaNegro , Col , Fil),
+        \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        % QUEDA HACER QUE NO PUEDAN SALTAR PIEZAS 
+        retract(casilla(_ ,  Prox_col , Prox_fil)),
+        assert(casilla(reinaNegro , Prox_col , Prox_fil)),
+        retract(casilla(reinaNegro , Col , Fil)).
+
+move(reyBlanco  , Col , Fil , Prox_col , Prox_fil) :-
+        (Prox_col is Col + 1; Prox_col is Col - 1;
+         Prox_fil is Fil + 1; Prox_fil is Fil - 1;
+         Prox_col is Col + 1, Prox_fil is Fil - 1;
+         Prox_col is Col - 1, Prox_fil is Fil - 1;
+         Prox_col is Col + 1, Prox_fil is Fil + 1;
+         Prox_col is Col - 1, Prox_fil is Fil + 1;),
+         Fil >= 1 , Fil =<  8,
+         Col >= 1, Col =< 8,
+         casilla(reyBlanco , Col , Fil),
+         \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  prox_col , prox_fil),
+        retract(casilla(_ ,  Prox_col , Prox_fil)),
+        assert(casilla(reyBlanco , Prox_col , Prox_fil)),
+        retract(casilla(reyBlanco , Col , Fil)).
+
+move(reyNegro  , Col , Fil , Prox_col , Prox_fil) :-
+        (Prox_col is Col + 1; Prox_col is Col - 1;
+         Prox_fil is Fil + 1; Prox_fil is Fil - 1;
+         Prox_col is Col + 1, Prox_fil is Fil - 1;
+         Prox_col is Col - 1, Prox_fil is Fil - 1;
+         Prox_col is Col + 1, Prox_fil is Fil + 1;
+         Prox_col is Col - 1, Prox_fil is Fil + 1;),
+         Fil >= 1 , Fil =<  8,
+         Col >= 1, Col =< 8,
+         casilla(reyNegro , Col , Fil),
+         \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  prox_col , prox_fil),
+        retract(casilla(_ ,  Prox_col , Prox_fil)),
+        assert(casilla(reyNegro , Prox_col , Prox_fil)),
+        retract(casilla(reyNegro , Col , Fil)).
 
 
 
