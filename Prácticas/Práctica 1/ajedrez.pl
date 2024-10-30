@@ -99,7 +99,6 @@ movi(caballoBlanco ,  Col , Fil , Prox_col , Prox_fil):-
         Prox_fil >= 1, Prox_fil =< 8,
         Prox_col >= 1, Prox_col =< 8,
         casilla(caballoBlanco , Col , Fil),
-        \+ evitadorDeSaltos(Col , Fil , Prox_col , Prox_fil),
         \+ casilla((peonBlanco, torreBlanco , alfilBlanco , reyBlanco ,  caballoBlanco , reinaBlanco) ,  Prox_col , Prox_fil),
         retract(casilla(_  , Prox_col , Prox_fil)),
         assert(casilla(caballoBlanco , Prox_col , Prox_fil)),
@@ -117,7 +116,6 @@ movi(caballoNegro ,  Col , Fil , Prox_col , Prox_fil):-
         Prox_fil >= 1, Prox_fil =< 8,
         Prox_col >= 1, Prox_col =< 8,
         casilla(caballoNegro , Col , Fil),
-        \+ evitadorDeSaltos(Col , Fil , Prox_col , Prox_fil),
         \+ casilla((peonNegro, torreNegro , alfilNegro , reyNegro ,  caballoNegro , reinaNegro) ,  Prox_col , Prox_fil),
         retract(casilla(_  , Prox_col , Prox_fil)),
         assert(casilla(caballoNegro , Prox_col , Prox_fil)),
@@ -143,7 +141,7 @@ movi(alfilBlanco , Col , Fil , Prox_fil, Prox_col):-
         Prox_fil is Fil - 3, Prox_col is Col + 3;
         Prox_fil is Fil - 4, Prox_col is Col + 4;
         Prox_fil is Fil - 5, Prox_col is Col + 5;
-        Prox_fil is Fil - 6, Prox _col is Col + 6;
+        Prox_fil is Fil - 6, Prox_col is Col + 6;
         Prox_fil is Fil - 7, Prox_col is Col + 7;
         Prox_fil is Fil + 1, Prox_col is Col + 1;
         Prox_fil is Fil + 2, Prox_col is Col + 2;
@@ -213,7 +211,7 @@ movi(torreBlanco,  Col, Fil, Prox_col, Prox_fil):-
          Prox_fil is Fil + 4; Prox_fil is Fil - 4;
          Prox_fil is Fil + 5; Prox_fil is Fil - 5;
          Prox_fil is Fil + 6; Prox_fil is Fil - 6;
-         Prox_fil is Fil + 7; Prox_fil is Fil - 7;)
+         Prox_fil is Fil + 7; Prox_fil is Fil - 7),
         Prox_fil >= 1, Prox_fil =< 8,
         Prox_col >= 1, Prox_col =< 8,
         casilla(torreBlanco , Col , Fil),
@@ -237,7 +235,7 @@ movi(torreNegro,  Col, Fil, Prox_col, Prox_fil):-
          Prox_fil is Fil + 4; Prox_fil is Fil - 4;
          Prox_fil is Fil + 5; Prox_fil is Fil - 5;
          Prox_fil is Fil + 6; Prox_fil is Fil - 6;
-         Prox_fil is Fil + 7; Prox_fil is Fil - 7;)
+         Prox_fil is Fil + 7; Prox_fil is Fil - 7),
         Prox_fil >= 1, Prox_fil =< 8,
         Prox_col >= 1, Prox_col =< 8,
         casilla(torreNegro , Col , Fil),
@@ -290,7 +288,7 @@ movi(reinaBlanco , Col , Fil, Prox_col, Prox_fil):-
         Prox_fil is Fil + 4, Prox_col is Col + 4;
         Prox_fil is Fil + 5, Prox_col is Col + 5;
         Prox_fil is Fil + 6, Prox_col is Col + 6;
-        Prox_fil is Fil + 7, Prox_col is Col + 7;),
+        Prox_fil is Fil + 7, Prox_col is Col + 7),
         Prox_fil >= 1, Prox_fil =< 8,
         Prox_col >= 1, Prox_col =< 8,
         \+ evitadorDeSaltos(Col , Fil , Prox_col , Prox_fil),
@@ -343,7 +341,7 @@ movi(reinaNegro , Col , Fil, Prox_col, Prox_fil):-
         Prox_fil is Fil + 4, Prox_col is Col + 4;
         Prox_fil is Fil + 5, Prox_col is Col + 5;
         Prox_fil is Fil + 6, Prox_col is Col + 6;
-        Prox_fil is Fil + 7, Prox_col is Col + 7;),
+        Prox_fil is Fil + 7, Prox_col is Col + 7),
         Prox_fil >= 1, Prox_fil =< 8,
         Prox_col >= 1, Prox_col =< 8,
         \+ evitadorDeSaltos(Col , Fil , Prox_col , Prox_fil),
@@ -359,7 +357,7 @@ movi(reyBlanco  , Col , Fil , Prox_col , Prox_fil) :-
          Prox_col is Col + 1, Prox_fil is Fil - 1;
          Prox_col is Col - 1, Prox_fil is Fil - 1;
          Prox_col is Col + 1, Prox_fil is Fil + 1;
-         Prox_col is Col - 1, Prox_fil is Fil + 1;),
+         Prox_col is Col - 1, Prox_fil is Fil + 1),
          Prox_fil >= 1, Prox_fil =< 8,
          Prox_col >= 1, Prox_col =< 8,
          casilla(reyBlanco , Col , Fil),
@@ -375,7 +373,7 @@ movi(reyNegro  , Col , Fil , Prox_col , Prox_fil) :-
          Prox_col is Col + 1, Prox_fil is Fil - 1;
          Prox_col is Col - 1, Prox_fil is Fil - 1;
          Prox_col is Col + 1, Prox_fil is Fil + 1;
-         Prox_col is Col - 1, Prox_fil is Fil + 1;),
+         Prox_col is Col - 1, Prox_fil is Fil + 1),
          Prox_fil >= 1, Prox_fil =< 8,
          Prox_col >= 1, Prox_col =< 8,
          casilla(reyNegro , Col , Fil),
