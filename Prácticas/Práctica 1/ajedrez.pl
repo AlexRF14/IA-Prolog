@@ -46,7 +46,7 @@ casilla(peonNegro , 8 , 7).
 movi(peonBlanco , Col , Fil , Prox_col , Prox_fil):-
         Prox_fil is Fil + 1,
         Prox_fil >= 1, Prox_fil =< 8,
-        Prox_col = Col,
+        Prox_col >= 1, Prox_col =< 8,
         casilla(peonBlanco , Col , Fil),
         \+ evitadorDeSaltos(Col , Fil , Prox_col , Prox_fil),
         \+ (casilla(_, Col, Prox_fil)),
@@ -57,6 +57,7 @@ movi(peonBlanco , Col , Fil, Prox_col , Prox_fil):-
         Prox_fil is Fil + 1,
         (Prox_col is Col + 1; Prox_col is Col - 1),
         Prox_fil >= 1, Prox_fil =< 8,
+        Prox_col >= 1, Prox_col =< 8,
         casilla(peonBlanco , Col , Fil),
         casilla(_, Prox_col , Prox_fil),
         \+ evitadorDeSaltos(Col , Fil , Prox_col , Prox_fil),
