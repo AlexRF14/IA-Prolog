@@ -19,3 +19,4 @@ potencia(Base , E , R):-
     potencia(Base , E1 , R1),
     R is Base * R1.
 */
+
